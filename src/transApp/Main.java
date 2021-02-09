@@ -4,6 +4,17 @@ import java.util.List;
 
 public class Main 
 {
+    private static List<AbstractVehicle> filterVehicles(List<AbstractVehicle> theList, CheckVehicle tester)
+    {
+        List<AbstractVehicle> tempList = new ArrayList<>();
+
+        for(AbstractVehicle v : theList ){
+            if(tester.test(v)){
+                tempList.add(v);
+            }
+        }
+        return tempList;
+    }
     private static void workWithData()
     {
         System.out.println("Welcome to Lambda's Animal Kingdom!");
@@ -48,8 +59,18 @@ public class Main
         myList.add(mustand);
 
         System.out.println(myList.toString());
+        System.out.println();
 
         System.out.println();
+        myList.sort((v1, v2)->v1.getName().compareToIgnoreCase(v2.getName()));
+        myList.forEach(v-> System.out.println(v.getName()));
+
+        List<AbstractVehicle> filteredList = filterVehicles(myList, (v)->v.getFuelLevel()<0);
+        filteredList.forEach(v->System.out.println(v));
+
+        System.out.println("\n\n");
+        filteredList = filterVehicles(myList, (v)-> (v.getFuelLevel()>0) && (v instanceof Cow ));
+        filteredList.forEach((v)->System.out.println(v));
 
     }
     public static void main(String[] args)

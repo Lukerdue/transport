@@ -27,7 +27,7 @@ public abstract class AbstractVehicle
         fuel = fuel - steps;
     }
 
-    int getFuel()
+    int getFuelLevel()
     {
         return fuel;
     }
